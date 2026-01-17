@@ -1,0 +1,24 @@
+node_modules/
+
+cache/
+artifacts/
+coverage/
+coverage.json
+typechain/
+typechain-types/
+*.log
+
+# Environment variables
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+.idea/
+
+# Next.js
+.next/
+out/
+dist/
+build/
