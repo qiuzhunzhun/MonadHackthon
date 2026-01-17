@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { ethers } from 'ethers';
 
-export default function Exchange({ account, contractAddresses, selectedFund }) {
+export default function Exchange({ account, contractAddresses }) {
   const [direction, setDirection] = useState('monToMsz'); // 'monToMsz' or 'mszToMon'
   const [amount, setAmount] = useState('');
   const [monBalance, setMonBalance] = useState(null);
@@ -82,11 +82,6 @@ export default function Exchange({ account, contractAddresses, selectedFund }) {
   };
 
   const handleExchange = async () => {
-    if (!selectedFund) {
-      setMessage({ type: 'error', text: '请先选择要投资的私募基金' });
-      return;
-    }
-
     if (!amount || parseFloat(amount) <= 0) {
       setMessage({ type: 'error', text: '请输入有效的兑换数量' });
       return;
@@ -165,33 +160,9 @@ export default function Exchange({ account, contractAddresses, selectedFund }) {
   return (
     <div className="card">
       <h2 style={{ marginBottom: '1.5rem' }}>MON ↔ MSZ 兑换</h2>
-
-      {selectedFund && (
-        <div style={{ 
-          background: 'var(--accent-color)', 
-          color: 'white', 
-          padding: '1rem', 
-          borderRadius: '0.5rem',
-          marginBottom: '1.5rem'
-        }}>
-          <h3 style={{ margin: '0 0 0.5rem 0' }}>已选择基金: {selectedFund.name}</h3>
-          <p style={{ margin: 0, fontSize: '0.875rem' }}>
-            {selectedFund.description} | 预期收益: {selectedFund.returnRate} | 风险等级: {selectedFund.riskLevel}
-          </p>
-        </div>
-      )}
-
-      {!selectedFund && (
-        <div style={{ 
-          background: 'var(--warning-color)', 
-          color: 'var(--text-color)', 
-          padding: '1rem', 
-          borderRadius: '0.5rem',
-          marginBottom: '1.5rem'
-        }}>
-          请先在上方选择要投资的私募基金
-        </div>
-      )}
+      <p style={{ color: 'var(--text-secondary)', marginBottom: '1.5rem', fontSize: '0.875rem' }}>
+        将您的MON代币兑换为MSZ代币，用于参与私募基金投资。兑换比例为1:1。
+      </p>
 
       {/* 余额显示 */}
       <div style={{ 
@@ -293,7 +264,7 @@ export default function Exchange({ account, contractAddresses, selectedFund }) {
       <button
         className="btn btn-primary"
         onClick={handleExchange}
-        disabled={loading || !amount || parseFloat(amount) <= 0 || !selectedFund}
+        disabled={loading || !amount || parseFloat(amount) <= 0}
         style={{ width: '100%' }}
       >
         {loading ? '处理中...' : direction === 'monToMsz' ? '兑换 MON → MSZ' : '赎回 MSZ → MON'}

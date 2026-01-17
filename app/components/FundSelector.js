@@ -51,7 +51,10 @@ export default function FundSelector({ account, selectedFund, onSelectFund }) {
 
   return (
     <div className="card">
-      <h2 style={{ marginBottom: '1.5rem' }}>选择私募基金</h2>
+      <h2 style={{ marginBottom: '1rem' }}>选择私募基金进行投资</h2>
+      <p style={{ color: 'var(--text-secondary)', marginBottom: '1.5rem', fontSize: '0.875rem' }}>
+        使用您兑换得到的MSZ代币投资心仪的私募基金
+      </p>
       
       {selectedFund ? (
         <div>
@@ -85,7 +88,7 @@ export default function FundSelector({ account, selectedFund, onSelectFund }) {
                 <strong>预期收益:</strong> {selectedFund.returnRate}
               </div>
               <div style={{ marginBottom: '0.5rem' }}>
-                <strong>最低投资:</strong> {selectedFund.minInvestment} MON
+                <strong>最低投资:</strong> {selectedFund.minInvestment} MSZ
               </div>
             </div>
             
@@ -109,13 +112,38 @@ export default function FundSelector({ account, selectedFund, onSelectFund }) {
                 }}></div>
               </div>
               <div style={{ fontSize: '0.875rem', color: 'var(--text-secondary)', marginTop: '0.5rem' }}>
-                {selectedFund.currentAmount.toLocaleString()} / {selectedFund.targetAmount.toLocaleString()} MON
+                {selectedFund.currentAmount.toLocaleString()} / {selectedFund.targetAmount.toLocaleString()} MSZ
               </div>
+            </div>
+
+            <div style={{ 
+              background: 'var(--accent-color)', 
+              color: 'white', 
+              padding: '1rem', 
+              borderRadius: '0.5rem',
+              marginBottom: '1rem'
+            }}>
+              <h4 style={{ margin: '0 0 0.5rem 0' }}>投资此基金</h4>
+              <p style={{ margin: 0, fontSize: '0.875rem', marginBottom: '1rem' }}>
+                使用您的MSZ代币投资此私募基金
+              </p>
+              <button 
+                className="btn"
+                style={{ 
+                  background: 'white', 
+                  color: 'var(--accent-color)',
+                  border: 'none',
+                  width: '100%'
+                }}
+                onClick={() => alert('投资功能即将上线 - 使用您的MSZ代币投资此基金')}
+              >
+                投资全部MSZ代币
+              </button>
             </div>
             
             <button 
               className="btn btn-secondary"
-              onClick={() => setSelectedFund(null)}
+              onClick={() => onSelectFund(null)}
               style={{ marginTop: '1rem' }}
             >
               重新选择
@@ -162,7 +190,7 @@ export default function FundSelector({ account, selectedFund, onSelectFund }) {
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '0.5rem', fontSize: '0.875rem' }}>
                 <div><strong>风险:</strong> {fund.riskLevel}</div>
                 <div><strong>收益:</strong> {fund.returnRate}</div>
-                <div><strong>最低:</strong> {fund.minInvestment} MON</div>
+                <div><strong>最低:</strong> {fund.minInvestment} MSZ</div>
                 <div><strong>进度:</strong> {getProgress(fund)}%</div>
               </div>
             </div>

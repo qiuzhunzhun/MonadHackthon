@@ -176,7 +176,7 @@ export default function Home() {
     <div className="container" style={{ minHeight: '100vh', padding: '2rem 1rem' }}>
       <header style={{ marginBottom: '2rem', textAlign: 'center' }}>
         <h1 style={{ fontSize: '2.5rem', marginBottom: '0.5rem' }}>MSZ 私募基金代币化平台</h1>
-        <p style={{ color: 'var(--text-secondary)' }}>使用MON代币兑换MSZ代币，参与私募基金投资</p>
+        <p style={{ color: 'var(--text-secondary)' }}>第一步：将MON代币兑换为MSZ代币<br/>第二步：使用MSZ代币投资私募基金</p>
       </header>
 
       <WalletConnect
@@ -190,12 +190,11 @@ export default function Home() {
 
       {account && isCorrectNetwork && (
         <>
-          <FundSelector account={account} selectedFund={selectedFund} onSelectFund={setSelectedFund} />
           <Exchange
             account={account}
             contractAddresses={CONTRACT_ADDRESSES}
-            selectedFund={selectedFund}
           />
+          <FundSelector account={account} selectedFund={selectedFund} onSelectFund={setSelectedFund} />
         </>
       )}
 
